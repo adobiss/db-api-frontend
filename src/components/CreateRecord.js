@@ -11,6 +11,7 @@ const CreateRecord = () => {
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleCreate = async () => {
     if (!clientName) {
@@ -21,7 +22,16 @@ const CreateRecord = () => {
     const { error } = await supabase
       .from('clients')
       .insert([{ client_name: clientName, contact_person: contactPerson, email, phone, address, city, country }]);
-    if (error) setError(error.message);
+    
+    if (error) {
+      setError(error.message);
+    } else {
+      setError('');
+      setSuccess('Client has been created successfully');
+      setTimeout(() => {
+        window.close();
+      }, 1000); // Close the window after 1 second
+    }
   };
 
   return (
@@ -36,6 +46,7 @@ const CreateRecord = () => {
       <input type="text" placeholder="Country" onChange={(e) => setCountry(e.target.value)} />
       <button onClick={handleCreate}>Create New</button>
       {error && <p>{error}</p>}
+      {success && <p>{success}</p>}
     </div>
   );
 };
