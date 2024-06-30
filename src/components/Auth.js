@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabaseClient';
 
-const Auth = () => {
+const Auth = ({ setAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,17 +11,16 @@ const Auth = () => {
 
   const handleLogin = async () => {
     console.log('Attempting login...');
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error, data } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       console.log('Login error:', error.message);
       setError(error.message);
     } else {
       console.log('Login successful, data:', data);
       setError('');
-      if (data && data.session) {
+      if (data) {
+        setAuthenticated(true);
         navigate('/main'); // Redirect to main page on successful login
-      } else {
-        console.log('No session found.');
       }
     }
   };

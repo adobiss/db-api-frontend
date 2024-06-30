@@ -1,8 +1,10 @@
-// src/components/Main.js
 import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
+import useAuthCheck from '../hooks/useAuthCheck';
 
-const Main = () => {
+const Main = ({ onLogout }) => {
+  useAuthCheck();
+
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -19,17 +21,21 @@ const Main = () => {
     fetchClients();
   }, [fetchClients]);
 
+  const handleCreateNew = () => {
+    window.open('/create', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div>
+      <h2>Main Page</h2>
       <input
         type="text"
         placeholder="Search by client name"
         onChange={(e) => setSearch(e.target.value)}
       />
       <button onClick={fetchClients}>Search</button>
-      <button onClick={() => window.open('/create', '_blank')}>
-        Create New
-      </button>
+      <button onClick={handleCreateNew}>Create New</button>
+      <button onClick={onLogout}>Logout</button>
       <table>
         <thead>
           <tr>
