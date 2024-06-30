@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
-import { useNavigate } from 'react-router-dom';
+import useAuthCheck from '../hooks/useAuthCheck';
 
 const Main = ({ onLogout }) => {
+  useAuthCheck();
+
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState('');
-  const navigate = useNavigate();
 
   const fetchClients = useCallback(async () => {
     const { data, error } = await supabase
@@ -17,16 +18,12 @@ const Main = ({ onLogout }) => {
   }, [search]);
 
   useEffect(() => {
-    const checkUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      if (!data.user) {
-        navigate('/');
-      } else {
-        fetchClients();
-      }
-    };
-    checkUser();
-  }, [fetchClients, navigate]);
+    fetchClients();
+  }, [fetchClients]);
+
+  const handleCreateNew = () => {
+    window.open('/create', '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div>
@@ -37,7 +34,7 @@ const Main = ({ onLogout }) => {
         onChange={(e) => setSearch(e.target.value)}
       />
       <button onClick={fetchClients}>Search</button>
-      <button onClick={() => navigate('/create')}>Create New</button>
+      <button onClick={handleCreateNew}>Create New</button>
       <button onClick={onLogout}>Logout</button>
       <table>
         <thead>

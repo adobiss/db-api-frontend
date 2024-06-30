@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import supabase from '../supabaseClient';
-import { useNavigate } from 'react-router-dom';
+import useAuthCheck from '../hooks/useAuthCheck';
 
 const CreateRecord = () => {
+  useAuthCheck();
+
   const [clientName, setClientName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
   const [email, setEmail] = useState('');
@@ -12,17 +14,6 @@ const CreateRecord = () => {
   const [country, setCountry] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      if (!data.user) {
-        navigate('/');
-      }
-    };
-    checkUser();
-  }, [navigate]);
 
   const handleCreate = async () => {
     if (!clientName) {

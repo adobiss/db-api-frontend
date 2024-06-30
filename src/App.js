@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Auth from './components/Auth';
@@ -8,11 +7,13 @@ import supabase from './supabaseClient';
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
       const { data } = await supabase.auth.getUser();
       setAuthenticated(!!data.user);
+      setLoading(false);
     };
     checkUser();
   }, []);
@@ -21,6 +22,10 @@ const App = () => {
     await supabase.auth.signOut();
     setAuthenticated(false);
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Render a loading state while checking authentication
+  }
 
   return (
     <Router>
