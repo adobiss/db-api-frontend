@@ -7,7 +7,6 @@ const Main = ({ onLogout }) => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
-  // Declare fetchClients before useEffect
   const fetchClients = useCallback(async () => {
     const { data, error } = await supabase
       .from('clients')
@@ -27,7 +26,7 @@ const Main = ({ onLogout }) => {
       }
     };
     checkUser();
-  }, [fetchClients, navigate]);
+  }, [fetchClients, navigate]); // Corrected dependency array
 
   return (
     <div>

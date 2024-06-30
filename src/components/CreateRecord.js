@@ -22,7 +22,7 @@ const CreateRecord = () => {
       }
     };
     checkUser();
-  }, [navigate]);
+  }, [navigate]); // Corrected dependency array
 
   const handleCreate = async () => {
     if (!clientName) {
