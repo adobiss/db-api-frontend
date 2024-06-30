@@ -1,29 +1,35 @@
 // src/components/Main.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
 
 const Main = () => {
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    fetchClients();
-  }, []);
-
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     const { data, error } = await supabase
       .from('clients')
       .select('*')
       .ilike('client_name', `%${search}%`);
     if (error) console.error(error);
     else setClients(data);
-  };
+  }, [search]);
+
+  useEffect(() => {
+    fetchClients();
+  }, [fetchClients]);
 
   return (
     <div>
-      <input type="text" placeholder="Search by client name" onChange={(e) => setSearch(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Search by client name"
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <button onClick={fetchClients}>Search</button>
-      <button onClick={() => window.open('/create', '_blank')}>Create New</button>
+      <button onClick={() => window.open('/create', '_blank')}>
+        Create New
+      </button>
       <table>
         <thead>
           <tr>
@@ -38,7 +44,7 @@ const Main = () => {
           </tr>
         </thead>
         <tbody>
-          {clients.map(client => (
+          {clients.map((client) => (
             <tr key={client.id}>
               <td>{client.id}</td>
               <td>{client.client_name}</td>
