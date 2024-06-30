@@ -1,4 +1,3 @@
-// src/components/Main.js
 import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
