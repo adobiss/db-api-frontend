@@ -26,7 +26,7 @@ const Main = ({ onLogout }) => {
       }
     };
     checkUser();
-  }, [fetchClients, navigate]); // Corrected dependency array
+  }, [fetchClients, navigate]);
 
   return (
     <div>
