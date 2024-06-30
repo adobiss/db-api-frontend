@@ -8,6 +8,15 @@ const Main = ({ onLogout }) => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
+  const fetchClients = async () => {
+    const { data, error } = await supabase
+      .from('clients')
+      .select('*')
+      .ilike('client_name', `%${search}%`);
+    if (error) console.error(error);
+    else setClients(data);
+  };
+
   useEffect(() => {
     const checkUser = async () => {
       const { data } = await supabase.auth.getUser();
@@ -18,16 +27,7 @@ const Main = ({ onLogout }) => {
       }
     };
     checkUser();
-  }, []);
-
-  const fetchClients = async () => {
-    const { data, error } = await supabase
-      .from('clients')
-      .select('*')
-      .ilike('client_name', `%${search}%`);
-    if (error) console.error(error);
-    else setClients(data);
-  };
+  }, [fetchClients, navigate]);
 
   return (
     <div>

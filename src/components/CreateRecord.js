@@ -23,7 +23,7 @@ const CreateRecord = () => {
       }
     };
     checkUser();
-  }, []);
+  }, [navigate]);
 
   const handleCreate = async () => {
     if (!clientName) {
