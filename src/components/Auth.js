@@ -1,15 +1,24 @@
 // src/components/Auth.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../supabaseClient';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Use navigate to redirect
 
   const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) setError(error.message);
+    const { error, session } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      setError(error.message);
+    } else {
+      setError('');
+      if (session) {
+        navigate('/main'); // Redirect to main page on successful login
+      }
+    }
   };
 
   return (
