@@ -16,7 +16,7 @@ const Main = ({ onLogout }) => {
       .ilike('client_name', `%${search}%`);
     if (error) console.error(error);
     else setClients(data);
-  }, [search]); // Include search as a dependency
+  }, [search]);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -28,7 +28,7 @@ const Main = ({ onLogout }) => {
       }
     };
     checkUser();
-  }, [fetchClients, navigate]); // Include both dependencies
+  }, [fetchClients, navigate]);
 
   return (
     <div>
