@@ -11,15 +11,17 @@ const Auth = () => {
 
   const handleLogin = async () => {
     console.log('Attempting login...');
-    const { error, session } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       console.log('Login error:', error.message);
       setError(error.message);
     } else {
-      console.log('Login successful, session:', session);
+      console.log('Login successful, data:', data);
       setError('');
-      if (session) {
+      if (data && data.session) {
         navigate('/main'); // Redirect to main page on successful login
+      } else {
+        console.log('No session found.');
       }
     }
   };
