@@ -35,18 +35,61 @@ const CreateRecord = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '300px' }}>
       <h2>Create New Client</h2>
-      <input type="text" placeholder="Client Name" onChange={(e) => setClientName(e.target.value)} required />
-      <input type="text" placeholder="Contact Person" onChange={(e) => setContactPerson(e.target.value)} />
-      <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input type="text" placeholder="Phone" onChange={(e) => setPhone(e.target.value)} />
-      <input type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
-      <input type="text" placeholder="City" onChange={(e) => setCity(e.target.value)} />
-      <input type="text" placeholder="Country" onChange={(e) => setCountry(e.target.value)} />
-      <button onClick={handleCreate}>Create New</button>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
+      <input 
+        type="text" 
+        placeholder="Client Name (Required)" 
+        value={clientName} 
+        onChange={(e) => setClientName(e.target.value)} 
+        required 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <input 
+        type="text" 
+        placeholder="Contact Person" 
+        value={contactPerson} 
+        onChange={(e) => setContactPerson(e.target.value)} 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <input 
+        type="email" 
+        placeholder="Email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <input 
+        type="text" 
+        placeholder="Phone" 
+        value={phone} 
+        onChange={(e) => setPhone(e.target.value)} 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <input 
+        type="text" 
+        placeholder="Address" 
+        value={address} 
+        onChange={(e) => setAddress(e.target.value)} 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <input 
+        type="text" 
+        placeholder="City" 
+        value={city} 
+        onChange={(e) => setCity(e.target.value)} 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <input 
+        type="text" 
+        placeholder="Country" 
+        value={country} 
+        onChange={(e) => setCountry(e.target.value)} 
+        style={{ marginBottom: '0px', width: '100%' }}
+      />
+      <button onClick={handleCreate} style={{ marginTop: '0px', alignSelf: 'flex-start' }}>Create New</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>}
     </div>
   );
 };
