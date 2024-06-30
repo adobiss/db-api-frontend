@@ -10,24 +10,24 @@ const Main = ({ onLogout }) => {
 
   // Declare fetchClients before useEffect
   const fetchClients = async () => {
-      const { data, error } = await supabase
-          .from('clients')
-          .select('*')
-          .ilike('client_name', `%${search}%`);
-      if (error) console.error(error);
-      else setClients(data);
+    const { data, error } = await supabase
+      .from('clients')
+      .select('*')
+      .ilike('client_name', `%${search}%`);
+    if (error) console.error(error);
+    else setClients(data);
   };
 
   useEffect(() => {
-      const checkUser = async () => {
-          const { data } = await supabase.auth.getUser();
-          if (!data.user) {
-              navigate('/');
-          } else {
-              fetchClients();
-          }
-      };
-      checkUser();
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        navigate('/');
+      } else {
+        fetchClients();
+      }
+    };
+    checkUser();
   }, [fetchClients, navigate]); // Include both dependencies
 
   return (

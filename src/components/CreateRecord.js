@@ -17,13 +17,13 @@ const CreateRecord = () => {
 
   useEffect(() => {
     const checkUser = async () => {
-        const { data } = await supabase.auth.getUser();
-        if (!data.user) {
-            navigate('/');
-        }
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        navigate('/');
+      }
     };
     checkUser();
-}, [navigate]); // Ensure 'navigate' is listed if used inside useEffect
+  }, [navigate]); // Ensure 'navigate' is listed if used inside useEffect
 
   const handleCreate = async () => {
     if (!clientName) {
