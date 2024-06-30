@@ -21,20 +21,16 @@ const Main = ({ onLogout }) => {
     fetchClients();
   }, [fetchClients]);
 
-  const handleCreateNew = () => {
-    window.open('/create', '_blank', 'noopener,noreferrer');
-  };
-
   return (
     <div>
       <h2>Main Page</h2>
       <input
         type="text"
-        placeholder="Search by client name"
+        placeholder="Filter by client name"
+        value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button onClick={fetchClients}>Search</button>
-      <button onClick={handleCreateNew}>Create New</button>
+      <button onClick={() => window.open('/create', '_blank', 'noopener,noreferrer')}>Create New</button>
       <button onClick={onLogout}>Logout</button>
       <table>
         <thead>
