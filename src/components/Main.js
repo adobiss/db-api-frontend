@@ -1,35 +1,45 @@
 // src/components/Main.js
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import supabase from '../supabaseClient';
+import { useNavigate } from 'react-router-dom';
 
-const Main = () => {
+const Main = ({ onLogout }) => {
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState('');
+  const navigate = useNavigate();
 
-  const fetchClients = useCallback(async () => {
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!data.user) {
+        navigate('/');
+      } else {
+        fetchClients();
+      }
+    };
+    checkUser();
+  }, []);
+
+  const fetchClients = async () => {
     const { data, error } = await supabase
       .from('clients')
       .select('*')
       .ilike('client_name', `%${search}%`);
     if (error) console.error(error);
     else setClients(data);
-  }, [search]);
-
-  useEffect(() => {
-    fetchClients();
-  }, [fetchClients]);
+  };
 
   return (
     <div>
+      <h2>Main Page</h2>
       <input
         type="text"
         placeholder="Search by client name"
         onChange={(e) => setSearch(e.target.value)}
       />
       <button onClick={fetchClients}>Search</button>
-      <button onClick={() => window.open('/create', '_blank')}>
-        Create New
-      </button>
+      <button onClick={() => navigate('/create')}>Create New</button>
+      <button onClick={onLogout}>Logout</button>
       <table>
         <thead>
           <tr>
