@@ -1,5 +1,5 @@
 // src/components/Main.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,14 +9,14 @@ const Main = ({ onLogout }) => {
   const navigate = useNavigate();
 
   // Declare fetchClients before useEffect
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     const { data, error } = await supabase
       .from('clients')
       .select('*')
       .ilike('client_name', `%${search}%`);
     if (error) console.error(error);
     else setClients(data);
-  };
+  }, [search]); // Include search as a dependency
 
   useEffect(() => {
     const checkUser = async () => {
