@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import supabase from '../supabaseClient';
 import useAuthCheck from '../hooks/useAuthCheck';
 
+/**
+ * CreateRecord component allows the user to create a new client record.
+ */
 const CreateRecord = () => {
   useAuthCheck();
 
@@ -15,6 +18,9 @@ const CreateRecord = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  /**
+   * Handles the creation of a new client record.
+   */
   const handleCreate = async () => {
     if (!clientName) {
       setError('Client name is required');
