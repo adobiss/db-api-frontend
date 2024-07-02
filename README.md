@@ -9,10 +9,10 @@ A web application prototype for managing client records, developed with React an
 - Create new record (opens in new window)
 
 ## Technologies Used
-- Database: PostgreSQL (Supabase)
-- API: Supabase JavaScript client
-- Front-End: React (Netlify)
-- Version Control: Git
+- **Database:** PostgreSQL (Supabase)
+- **API:** Supabase JavaScript client
+- **Front-End:** React (Netlify)
+- **Version Control:** Git
 
 ## Database Schema
 ```
