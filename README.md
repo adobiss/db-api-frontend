@@ -6,7 +6,7 @@ A web application prototype for managing client records, developed with React an
 ## Features	
 - User authentication (Supabase)
 - View client records for authenticated users (filter by client name)
-- Create new record (opens in new window)
+- Create new record (opens in new tab)
 
 ## Technologies Used
 - **Database:** PostgreSQL (Supabase)
@@ -72,7 +72,7 @@ CREATE TABLE public.clients (
 3. Use the application to manage client records:
     - Authenticate with email and password
     - View client records (filter by client name)
-    - Create new record (opens in new window)
+    - Create new record (opens in new tab)
 
 ## Repository Structure
 - **src/**: Contains the source code.
