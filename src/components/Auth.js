@@ -1,5 +1,5 @@
 // src/components/Auth.js
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react'; // Removed useEffect
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabaseClient';
 import useAuthCheck from '../hooks/useAuthCheck';
