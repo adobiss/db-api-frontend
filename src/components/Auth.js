@@ -55,8 +55,8 @@ const Auth = ({ setAuthenticated }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="container align-left">
+      <h2>User Login</h2>
       <input
         type="email"
         name="email" // Added name attribute for browser autofill
@@ -65,6 +65,7 @@ const Auth = ({ setAuthenticated }) => {
         onChange={handleEmailChange}
         onKeyDown={handleEmailKeyDown}
         autoComplete="email" // Enable browser autofill for email
+        style={{ height: '40px' }}
       />
       <input
         type="password"
@@ -75,8 +76,9 @@ const Auth = ({ setAuthenticated }) => {
         onKeyDown={handlePasswordKeyDown}
         autoComplete="current-password" // Enable browser autofill for password
         ref={passwordRef} // Reference to the password field
+        style={{ height: '40px' }}
       />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin} style={{ height: '40px' }}>Login</button>
       {error && <p>{error}</p>}
     </div>
   );

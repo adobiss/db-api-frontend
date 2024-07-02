@@ -1,3 +1,4 @@
+// src/components/CreateRecord.js
 import React, { useState } from 'react';
 import supabase from '../supabaseClient';
 import useAuthCheck from '../hooks/useAuthCheck';
@@ -43,61 +44,63 @@ const CreateRecord = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '300px' }}>
+    <div className="container align-left">
       <h2>Create New Client</h2>
-      <input
-        type="text"
-        placeholder="Client Name (Required)"
-        value={clientName}
-        onChange={(e) => setClientName(e.target.value)}
-        required
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <input
-        type="text"
-        placeholder="Contact Person"
-        value={contactPerson}
-        onChange={(e) => setContactPerson(e.target.value)}
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <input
-        type="text"
-        placeholder="Phone"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <input
-        type="text"
-        placeholder="Address"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <input
-        type="text"
-        placeholder="City"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <input
-        type="text"
-        placeholder="Country"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        style={{ marginBottom: '0px', width: '100%' }}
-      />
-      <button onClick={handleCreate} style={{ marginTop: '0px', alignSelf: 'flex-start' }}>Create New</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
+      <div style={{ display: 'flex', flexDirection: 'column', width: '25%' }}>
+        <input
+          type="text"
+          placeholder="Client Name (Required)"
+          value={clientName}
+          onChange={(e) => setClientName(e.target.value)}
+          required
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <input
+          type="text"
+          placeholder="Contact Person"
+          value={contactPerson}
+          onChange={(e) => setContactPerson(e.target.value)}
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <input
+          type="text"
+          placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <input
+          type="text"
+          placeholder="Country"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          style={{ height: '40px', marginBottom: '0px' }}
+        />
+        <button onClick={handleCreate} style={{ height: '40px', marginBottom: '0px' }}>Create New</button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {success && <p style={{ color: 'green' }}>{success}</p>}
+      </div>
     </div>
   );
 };

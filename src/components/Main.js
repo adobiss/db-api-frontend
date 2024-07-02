@@ -1,3 +1,4 @@
+// src/components/Main.js
 import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
 import useAuthCheck from '../hooks/useAuthCheck';
@@ -31,16 +32,17 @@ const Main = ({ onLogout }) => {
   }, [fetchClients]);
 
   return (
-    <div>
-      <h2>Main Page</h2>
+    <div className="container align-left">
+      <h2>Clients</h2>
       <input
         type="text"
         placeholder="Filter by client name"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        style={{ height: '40px' }}
       />
-      <button onClick={() => window.open('/create', '_blank', 'noopener,noreferrer')}>Create New</button>
-      <button onClick={onLogout}>Logout</button>
+      <button style={{ height: '40px' }} onClick={() => window.open('/create', '_blank', 'noopener,noreferrer')}>Create New</button>
+      <button style={{ height: '40px' }} onClick={onLogout}>Logout</button>
       <table>
         <thead>
           <tr>
