@@ -1,5 +1,5 @@
 // src/components/Auth.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabaseClient';
 import useAuthCheck from '../hooks/useAuthCheck';
@@ -15,15 +15,9 @@ const Auth = ({ setAuthenticated }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const passwordRef = useRef();
 
   useAuthCheck();
-
-  useEffect(() => {
-    const savedEmail = localStorage.getItem('email');
-    if (savedEmail) {
-      setEmail(savedEmail);
-    }
-  }, []);
 
   /**
    * Handles the login process.
@@ -46,10 +40,15 @@ const Auth = ({ setAuthenticated }) => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    localStorage.setItem('email', e.target.value);
   };
 
-  const handleKeyDown = (e) => {
+  const handleEmailKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      passwordRef.current.focus();
+    }
+  };
+
+  const handlePasswordKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleLogin();
     }
@@ -60,16 +59,22 @@ const Auth = ({ setAuthenticated }) => {
       <h2>Login</h2>
       <input
         type="email"
+        name="email" // Added name attribute for browser autofill
         placeholder="Email"
         value={email}
         onChange={handleEmailChange}
+        onKeyDown={handleEmailKeyDown}
+        autoComplete="email" // Enable browser autofill for email
       />
       <input
         type="password"
+        name="password" // Added name attribute for browser autofill
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        onKeyDown={handleKeyDown}
+        onKeyDown={handlePasswordKeyDown}
+        autoComplete="current-password" // Enable browser autofill for password
+        ref={passwordRef} // Reference to the password field
       />
       <button onClick={handleLogin}>Login</button>
       {error && <p>{error}</p>}
