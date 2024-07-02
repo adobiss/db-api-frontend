@@ -1,9 +1,11 @@
+// src/App.js
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Auth from './components/Auth';
 import Main from './components/Main';
 import CreateRecord from './components/CreateRecord';
 import supabase from './supabaseClient';
+import './App.css';  // Import CSS file
 
 /**
  * App component manages routing and authentication state.
