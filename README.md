@@ -51,28 +51,24 @@ CREATE TABLE public.clients (
     REACT_APP_SUPABASE_KEY=your-supabase-key
     ```
 
-4. Run the application:
-    ```sh
-    npm start
-    ```
-
-### Deployment
-- Deploy on Netlify using its free tier.
-- Set the following environment variables in your Netlify site settings:
-    - `REACT_APP_SUPABASE_URL`
-    - `REACT_APP_SUPABASE_KEY`
-
 ## Usage
 1. Start the development server:
     ```sh
     npm start
     ```
+
 2. Open [http://localhost:3000](http://localhost:3000) to view in the browser.
 
 3. Use the application to manage client records:
     - Authenticate with email and password
     - View client records (filter by client name)
     - Create new record (opens in new tab)
+
+## Deployment
+- Deploy on Netlify using its free tier.
+- Set the following environment variables in your Netlify site settings:
+    - `REACT_APP_SUPABASE_URL`
+    - `REACT_APP_SUPABASE_KEY`
 
 ## Repository Structure
 - **src/**: Contains the source code.
