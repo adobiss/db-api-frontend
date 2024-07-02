@@ -2,12 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 import supabase from '../supabaseClient';
 import useAuthCheck from '../hooks/useAuthCheck';
 
+/**
+ * Main component displays the main page with a list of clients and search functionality.
+ * 
+ * @param {Object} props - The component props
+ * @param {Function} props.onLogout - Function to handle user logout
+ */
 const Main = ({ onLogout }) => {
   useAuthCheck();
 
   const [clients, setClients] = useState([]);
   const [search, setSearch] = useState('');
 
+  /**
+   * Fetches the clients from the database based on the search criteria.
+   */
   const fetchClients = useCallback(async () => {
     const { data, error } = await supabase
       .from('clients')

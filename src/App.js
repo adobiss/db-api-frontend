@@ -5,6 +5,9 @@ import Main from './components/Main';
 import CreateRecord from './components/CreateRecord';
 import supabase from './supabaseClient';
 
+/**
+ * App component manages routing and authentication state.
+ */
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
